@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 
-const DetallePaciente = ({ paciente, propietario,email,telefono,sintomas, handleEditar, toggleMostrarDetalle }) => {
+const DetallePaciente = ({ paciente, propietario,email,telefono,sintomas, handleEditar, setMostrarDetalle, mostrarDetalle }) => {
   const [nuevoPaciente, setNuevoPaciente] = useState(paciente);
   const [nuevoPropietario, setNuevoPropietario] = useState(propietario);
   const [nuevoEmail, setNuevoEmail] = useState(email);
   const [nuevoTelefono, setNuevoTelefono] = useState(telefono);
   const [nuevoSintomas, setNuevoSintomas] = useState(sintomas);
   const [mostrarEdicion,setMostrarEdicion]= useState(true)
-  const [mostrarDetalle,setMostrarDetalle] = useState(true)
 
   const guardarCambios = () => {
     const pacienteActualizado = {
@@ -19,7 +18,7 @@ const DetallePaciente = ({ paciente, propietario,email,telefono,sintomas, handle
       sintomas: nuevoSintomas,
     };
     handleEditar(pacienteActualizado);
-    toggleMostrarDetalle()
+    setMostrarDetalle(!mostrarDetalle)
   };
 
   return (

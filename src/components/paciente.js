@@ -5,15 +5,6 @@ import DetallePaciente from './DetallePaciente';
 const Paciente = ({ item, handleEliminar, handleEditar }) => {
   const { paciente, propietario, email, telefono, sintomas } = item;
   const [mostrarDetalle, setMostrarDetalle] = useState(false);
-  const [mostrarEdicion, setMostrarEdicion] = useState(false);
-
-  const toggleMostrarDetalle = () => {
-    setMostrarDetalle(!mostrarDetalle);
-  };
-  
-  const eliminarPaciente = () => {
-    handleEliminar(item.id);
-  };
 
   return (
     <View style={styles.modalContainer}>
@@ -28,7 +19,7 @@ const Paciente = ({ item, handleEliminar, handleEditar }) => {
       <View style={styles.labelContainer}>
 
       
-        <Pressable style={styles.btnEliminar} onPress={eliminarPaciente}>
+      <Pressable style={styles.btnEliminar} onPress={() => handleEliminar(item.id)}>
           <Text style={styles.txtBotones} >Eliminar {''}</Text>
         </Pressable>
 
@@ -39,17 +30,16 @@ const Paciente = ({ item, handleEliminar, handleEditar }) => {
             email={email}
             telefono={telefono}
             sintomas={sintomas}
-            toggleMostrarDetalle = {toggleMostrarDetalle}
+            setMostrarDetalle = {() => setMostrarDetalle(!mostrarDetalle)}
             handleEditar={(nuevoPaciente) =>
               handleEditar(item.id, nuevoPaciente)
             }
           />
-          
         ) : (
-          <Pressable style={styles.btnModificar} onPress={toggleMostrarDetalle}>
+          <Pressable style={styles.btnModificar} onPress={() => setMostrarDetalle(!mostrarDetalle)}>
             <Text style={styles.txtBotones}>Modificar {''}</Text>
           </Pressable>
-          )}
+        )}
       </View>
     </View>
   );
